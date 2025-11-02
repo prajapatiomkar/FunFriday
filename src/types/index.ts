@@ -4,19 +4,23 @@ export interface User {
   name: string | null;
 }
 
-export interface GameRoom {
+export interface Player {
   id: string;
-  roomCode: string;
-  gameType: string;
-  hostId: string;
-  players: User[];
-  status: 'waiting' | 'active' | 'completed';
+  name: string;
+  socketId: string;
+  score?: number;
 }
 
-export interface GameState {
-  currentQuestion?: number;
-  scores: Record<string, number>;
-  players: User[];
+export interface GameRoom {
+  roomCode: string;
+  gameType: GameType;
+  host: {
+    id: string;
+    name: string;
+  };
+  players: Player[];
+  status: 'waiting' | 'active' | 'completed';
+  createdAt: Date;
 }
 
 export type GameType = 'trivia' | 'truth-or-dare' | 'poll';
